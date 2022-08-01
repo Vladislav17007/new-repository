@@ -1,11 +1,11 @@
 import React from "react";
 
-const Postitem = (props) => {
+const Postitems = (props) => {
 
     return (
                 <div className="post">
       <div className="post_content">
-        <strong>{props.post.id}. {props.post.title}</strong>
+        <strong>{props.number}. {props.post.title}</strong>
         <div >
           {props.post.body}
         </div>
@@ -17,4 +17,4 @@ const Postitem = (props) => {
     );
 };
 
-export default Postitem;
+export default Postitems;
