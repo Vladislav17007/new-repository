@@ -9,7 +9,7 @@ const PostList = ({posts, title}) => {
             <h1 style={{textAlign: 'center'}}>
             {title}
             </h1>
-             {/*создание упорядоченной нумераци с помощью передачи номера в элемента в массиве-->*/},
+             {/*создание упорядоченной нумераци с помощью передачи номера в элемента в массиве-->*/}
         {posts.map((post, index) =>
           <Postitems number={index + 1} post={post} key={post.id}/>
           )}

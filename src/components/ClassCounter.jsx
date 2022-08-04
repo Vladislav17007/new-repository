@@ -55,4 +55,4 @@ class ClassCounter extends React.Component {
                                         }
                                         }
 
-                                        export default ClassCounter;
+export default ClassCounter;

@@ -28,6 +28,8 @@ const bodyInputRef = useRef ();
 
 const addNewPost = (e) => {
   e.preventDefault();
+  setPosts([...posts,{...post, id: Date.now()}])
+  setPost({title:'', body:''})
 };
 
   return (
@@ -36,7 +38,7 @@ const addNewPost = (e) => {
         <form>
           {/*Управляемый компонент*/}
         <MyInput  
-                  value={post}
+                  value={post.title}
                   //добавление функции OnChange для отслежки добавления чего-то пользователем
                   onChange={e => setPost({...post, title: e.target.value})}
                   type="text" 
