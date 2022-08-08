@@ -6,54 +6,77 @@ import Postitems from "./components/Postitems";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput"
+import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 function App() {
   const [posts, setPosts] = useState([
-    {id: 1, title: 'Javascript', body: 'Description',},
-    {id: 2, title: 'Javascript', body: 'Description',},
-    {id: 3, title: 'Javascript', body: 'Description',},
+    {id: 1, title: 'аа', body: 'бб',},
+    {id: 2, title: 'гг 2', body: 'аа',},
+    {id: 3, title: 'вв 3', body: 'яя',},
   ])
 
+const [selectedSort, setSelectedSort] = useState('');
 
-/*1-Й способ получения данных у пользователя через управляемый Input*/
-const [post, setPost] = useState({title: '', body:'',}) /*Двусторонее связывание*/
-/*Стрелочная функция*/
-const [body, setBody] = useState('') /*Двусторонее связывание*/
+const [searchQuery, setSearchQuery] = useState('');
 
+function getSortedPosts() {
+  console.log('ОТРАБОТАЛА ФУНКЦИЯ sortedPosts');
+  if(selectedSort) {
+    return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
+  }
+  return posts;
+}
+
+const sortedPosts = getSortedPosts();
+
+const createPost = (newPost) => {
+    setPosts([...posts, newPost])
+}
+
+const removePost = (post) =>{
+  setPosts(posts.filter(p => p.id !== post.id))
+}
+
+const sortPosts = (sort) => {
+  setSelectedSort(sort);
+}
 
 /*2-й способ получения данных у пользователя через неуправляемый Input*/
 /*Новый хук UseRef. Получение доступа к DOM элементу
 const bodyInputRef = useRef ();
 */
 
-const addNewPost = (e) => {
-  e.preventDefault();
-  setPosts([...posts,{...post, id: Date.now()}])
-  setPost({title:'', body:''})
-};
 
   return (
     /*В этой функции должен быть один род-ий элемент */
     <div className="App">
-        <form>
-          {/*Управляемый компонент*/}
-        <MyInput  
-                  value={post.title}
-                  //добавление функции OnChange для отслежки добавления чего-то пользователем
-                  onChange={e => setPost({...post, title: e.target.value})}
-                  type="text" 
-                  placeholder="Название поста."/>
+        <PostForm create={createPost}/>
+        <hr style={{margin: '15px 0'}}></hr>
+        <div>
+          <MyInput 
+          value={setSearchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          placeholder="Поиск..."
+          />
+          <MySelect
+                value={selectedSort}
+                onChange={sortPosts}
+                defaultValue="Сортировка"
+                options={[
+                  {value: 'title', name: 'По названию'},
+                  {value: 'body', name: 'По описанию'},
+                ]}
+          />
+        </div>
 
-                  {/*Неуправляемый component*/}
-        <MyInput
-                  value={post.body}
-                  onChange={e => setPost({...post, body: e.target.value})}
-                  type="text"
-                  placeholder="Описание поста."/>
-        {/*добавление функции onClick для управления кнопкой пользователем*/}
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-        </form>
-        <PostList posts={posts} title="Посты про JS"/>
+        {/*Отрисовка по условию с помощью тернарного оператора*/}
+        {posts.length 
+            ?
+              <PostList remove={removePost} posts={sortedPosts} title="Посты про JS"/>
+            :
+              <h1 style={{textAlign: 'center'}}>Постов не существует.</h1>
+        }
     </div>
   );
 }
