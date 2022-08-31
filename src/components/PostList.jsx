@@ -1,7 +1,6 @@
 import React from "react";
 import Postitems from "./Postitems";
 
-
 const PostList = ({posts, title, remove}) => {
     return (
         <div>

@@ -15,6 +15,11 @@ const Postitems = (props) => {
           <MyButton onClick={() => props.remove(props.post)}>
           Удалить пост.
           </MyButton>
+
+        <MyButton onClick={() => props.remove(props.post)}>
+          Удалить пост.
+        </MyButton>
+
       </div>
     </div>
     );
