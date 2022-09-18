@@ -3,9 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="style.css" type="text/css" rel="stylesheet"/>
     <title>React App</title>
   </head>
   <body>
+    <input value='Владислав' title='Введите своё имя' class='first-name-input default-input' id='first-name'/>
+    <input value='Исмаилов' class='last-name-input default-input' id='last-name'/>
+    <input value='Самарканд' class='address-input default-input' id='address'/>
+    
+    <select class="select-class-name" id='cities' >
+      <option>Самарканд</option>
+      <option>Бухара</option>
+      <option selected='selected'>Марат</option>
+    </select>
+
+    <textarea id='hobbies'>JS, HTML, CSS</textarea>
+
+
+    <script src="index.js" ></script>
+
+    <button class="ripple-button">Click me</button>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
       <!-- ЗДЕСЬ БУДЕТ МОЁ JS ПРИЛОЖЕНИЕ -->
