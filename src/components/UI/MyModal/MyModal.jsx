@@ -1,11 +1,18 @@
 import React from "react";
-import cl from './MyModal.css';
+import classes from './MyModal.module.css';
 
 
-const MyModal = (children) => {
+const MyModal = ({children, visible, setVisible}) => {
+
+    const rootClasses = [classes.MyModal]
+    
+    if (visible) {
+        rootClasses.push(classes.active);
+    }
+
     return (
-        <div className={[cl.myModal, cl.active].join('')}>
-            <div className={cl.myModalContent}>
+        <div className={rootClasses.join('')}>
+            <div className={classes.myModalContent}>
                 {children}
             </div>
         </div>

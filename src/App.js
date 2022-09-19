@@ -45,21 +45,23 @@ function App() {
 
   return (
     /*В этой функции должен быть один род-oй элемент */
-    <div className="App">
+      <div className="App">
 
-        <MyModal></MyModal>
-        <PostForm create={createPost}/>
+        
+            <MyModal>
+                <PostForm create={createPost} />
+            </MyModal>
+       
+        
 
-        <hr style={{margin: '15px 0'}}/>
-        <PostFilter 
-              filter={filter}
-              setFilter={setFilter}
-
+        <hr style={{ margin: '15px 0' }} />
+        <PostFilter
+            filter={filter}
+            setFilter={setFilter} 
         />
+        <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
 
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS"/>
-
-    </div>
+      </div>
   );
 }
 

@@ -74,7 +74,7 @@
         place-items: center;
       }
       
-      .ripple-button {
+    .ripple-button {
         display: inline-grid;
         place-items: center;
         position: relative;
@@ -91,7 +91,7 @@
         overflow: hidden;
       }
       
-      .ripple-button::before {
+    .ripple-button::before {
         content: "";
         position: absolute;
         top: var(--y);
@@ -106,7 +106,7 @@
         opacity: 0.5;
       }
       
-      .pulse::before {
+    .pulse::before {
         animation: pulse 100ms;
       }
       
