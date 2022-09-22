@@ -20,6 +20,7 @@ function App() {
   ])
 
   const [filter, setFilter] = useState({sort:'', query:''})
+  const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo(() => {
 
@@ -35,6 +36,7 @@ function App() {
 
   const createPost = (newPost) => {
       setPosts( [...posts, newPost])
+      setModal(false)
   }
 
   // Получаем post из дочернего элемента
@@ -46,9 +48,10 @@ function App() {
   return (
     /*В этой функции должен быть один род-oй элемент */
       <div className="App">
-
-        
-            <MyModal>
+            <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
+              Создать Пользователя
+            </MyButton>
+            <MyModal visible={modal} setVisible={setModal}>
                 <PostForm create={createPost} />
             </MyModal>
        
