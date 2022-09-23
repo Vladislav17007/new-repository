@@ -1,7 +1,6 @@
 import React from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Postitems from "./Postitems";
-
-
 
 const PostList = ({posts, title, remove}) => {
     
@@ -16,12 +15,21 @@ const PostList = ({posts, title, remove}) => {
     return (
         <div>
             <h1 style={{textAlign: 'center'}}>
-            {title}
+                {title}
             </h1>
+            <TransitionGroup>
+                {posts.map((post, index) =>
+            <CSSTransition
+                key={post.id}
+                timeout={500}
+                classNames="post">
              {/*создание упорядоченной нумераци с помощью передачи номера в элементе в массиве*/}
-        {posts.map((post, index) =>
-          <Postitems remove={remove} number={index + 1} post={post} key={post.id}/>
-          )}
+            <Postitems remove={remove} number={index + 1} post={post} />
+            
+            </CSSTransition>
+            )}
+
+            </TransitionGroup>
           </div>
     );
 };
