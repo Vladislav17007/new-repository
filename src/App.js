@@ -11,15 +11,11 @@ import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/UI/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
+import axios from "axios";
 
 
 function App() {
-  const [posts, setPosts] = useState([
-    {id: 1, title: 'аа', body: 'бб'},
-    {id: 2, title: 'гг 2', body: 'аа'},
-    {id: 3, title: 'вв 3', body: 'яя'},
-  ])
-
+  const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort:'', query:''})
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
@@ -27,6 +23,11 @@ function App() {
   const createPost = (newPost) => {
       setPosts( [...posts, newPost])
       setModal(false)
+  }
+
+  async  function fetchPosts () {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    setPosts(response.data)
   }
 
   // Получаем post из дочернего элемента
@@ -38,6 +39,7 @@ function App() {
   return (
     /*В этой функции должен быть один род-oй элемент */
       <div className="App">
+            <button onClick={fetchPosts}>GET POSTS</button>
             <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
               Создать Пользователя
             </MyButton>
