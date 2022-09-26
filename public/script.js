@@ -47,4 +47,5 @@ function logValue(id) {
       },
       { once: true }
     );
+
   });

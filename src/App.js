@@ -1,5 +1,5 @@
 /*Не забываем импортировать все компоненты*/
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ClassCounter from "./components/ClassCounter";
 import './styles/app.css';
 import Postitems from "./components/Postitems";
@@ -12,6 +12,7 @@ import PostFilter from "./components/UI/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
 import axios from "axios";
+import PostService from "./API/PostService";
 
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
   const [filter, setFilter] = useState({sort:'', query:''})
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+
+   useEffect(() => {
+    fetchPosts()
+   }, [])
 
   const createPost = (newPost) => {
       setPosts( [...posts, newPost])
@@ -26,9 +32,14 @@ function App() {
   }
 
   async  function fetchPosts () {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    setPosts(response.data)
-  }
+    setIsPostsLoading(true);
+    setTimeout( async() => {
+
+      const posts = await PostService.getAll();
+      setPosts(posts);
+      setIsPostsLoading(false);
+    }, 1000)
+    }
 
   // Получаем post из дочернего элемента
   const removePost = (post) => {
@@ -54,7 +65,11 @@ function App() {
             filter={filter}
             setFilter={setFilter} 
         />
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
+        {isPostsLoading
+            ?<h1>Загрузка...</h1>
+            :<PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
+
+        }
 
       </div>
   );
