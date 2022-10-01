@@ -19,10 +19,11 @@ const PostList = ({posts, title, remove}) => {
             </h1>
             <TransitionGroup>
                 {posts.map((post, index) =>
-            <CSSTransition
-                key={post.id}
-                timeout={500}
-                classNames="post">
+                    <CSSTransition
+                        key={post.id}
+                        timeout={500}
+                        classNames="post"
+                    >
              {/*создание упорядоченной нумераци с помощью передачи номера в элементе в массиве*/}
             <Postitems remove={remove} number={index + 1} post={post} />
             
