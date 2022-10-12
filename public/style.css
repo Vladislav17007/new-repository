@@ -68,7 +68,7 @@
 
     body {
         font-family: system-ui;
-        /*background: hsl(200 50% 5%);*/
+        background: hsl(200 50% 5%);
         min-height: 100vh;
         display: grid;
         place-items: center;
